@@ -1,3 +1,6 @@
 .ipynb_checkpoints/
+.vscode/
+grants_masterxml_kaken/
 xml/
 config.ini
+*.dump
