@@ -18,19 +18,22 @@
 
 ## 0. 事前準備
 
-- Github Desktopをインストールしておく。
-　https://desktop.github.com/
+- [Github Desktop](https://desktop.github.com/)をインストールしておく。
+　
+- [Anaconda](https://www.python.jp/install/windows/anaconda/install_anaconda.htm)をインストールしておく[^1]。
+　[^1]:ディフォルト設定でOK
 
-- Anacondaをインストールしておく。
-　https://www.python.jp/install/windows/anaconda/install_anaconda.html
-　※ディフォルト設定でOK
-
-- MariaDBをインストールしておく。
-  https://mariadb.org/
-  ※MariaDBをインストールすると、HeidiSQLというGUIのDB管理ソフトウェアもインストールされる。MariaDBはコマンドラインで操作しても、HeidiSQLから操作してもOK。ユーザ名、パスワード、データベース名は、config.ipynbを使って ./config.ini として保存しておく。
+- [MariaDB] https://mariadb.org/)をインストールしておく[^2][^3][^4]。
+ 
+  [^2]:[windowsの場合の設定](https://www.trifields.jp/how-to-install-mariadb-on-windows-2440)
+  [^3]:MariaDBをインストールすると、HeidiSQLというGUIのDB管理ソフトウェアもインストールされる。MariaDBはコマンドラインで操作しても、HeidiSQLから操作してもOK。ユーザ名、パスワード、データベース名は、config.ipynbを使って ./config.ini として保存しておく。
+  [^4]:ユーザー名はrootのままがお勧め。
  
 
-1. GithubのC4RAのリポジトリ（https://github.com/c4ra/kaken_parse_grants_masterxml ）にアクセスし、右端にある「Clone or download」をクリック。
+1. [GithubのC4RAのリポジトリ](https://github.com/c4ra/kaken_parse_grants_masterxml)にアクセスし、右端にある「Clone or download」をクリック。
+
+![C4RAレポジトリのClone](https://files.slack.com/files-pri/TB5TT043E-FBDMHR7UJ/step2.png)
+
 2.「Open in Desktop」をクリック。
 3. あらかじめインストールしておいたAnacondaに同報されている「Jupyter Notebook」を起動し、保存したGithubのC4RAのリポジトリを表示させる。
 
@@ -42,9 +45,12 @@
 1. 「Jupyter Notebook」でcongig.ipynbを選択しRunを押す。（しばらく待っているとカレントディレクトリにconfig.iniが作られます。）
 
 2. 作成された「config.ini」をエディタソフト（メモ帳でもvscodeなど）で開き、左辺のそれぞれの設定項目に対して、右辺に自分のIDやパスワードがちゃんと入っているか確認する。
-　
+
+3. （入っていなかった場合は）適当なテキストエディタで直接入力する。
+
+※HeidiSQLの設定と合わせる必要があります！　
 ※これまでの試した人の意見として、いきなり引っ掛かりがちな箇所です。
-※別の方法として、適当なテキストエディタで直接入力して作っても差し支えありません。
+
 
 ## 2. bitbucketのKAKENマスタをローカルにパースする
 
@@ -63,7 +69,13 @@
 
 ## 4-1. KAKENデータベースからXMLファイルをダウンロードする
 
-1. 下記ファイルに記載してある手順にしたがう
+0. anaconda promptからtqdmをインストールする[^5]。
+[^5]:anaconda promptを立ち上げ、	<code><nowiki>conda install tqdm	</nowiki></code>と入力。しばらく待つと、Proceed ([y]/n)?と表示されるので、yを入力する。
+
+1. 下記ファイルに記載してある「事前準備」に従い、CiNiiのwebAPI登録後発行されるappidを設定ファイルに書き込む。
+　※configparserで別途appidを設定ファイルに書き込んでおく。は無視してOK。
+
+2.「ここから本番」以降をRunする。
 - kaken_zenkadai_download.ipynb
 
 ## 4-2. KAKENからダウンロードしたXMLファイルをパースしてローカルのMariaDBに保存する
